@@ -31,5 +31,5 @@ def get_equity_account():
 def get_hold_amount(account, transaction_id):
     account_transfers_qs = account.get_transfers_by_transaction_external_id(transaction_id)
     account_transfer = account_transfers_qs.filter(transaction__status=TRANSACTION_STATUSES.HOLD).first()
-    hold_anount = account_transfer.amount
-    return hold_anount
+    hold_amount = getattr(account_transfer, 'amount', 0)
+    return hold_amount

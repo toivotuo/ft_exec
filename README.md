@@ -6,7 +6,7 @@ API for several operations.
 
 ## Setup
 1. Create new virtualenv (python 2.7)
-2. `cd ft_exec & pip install packages.txt`
+2. `cd ft_exec & pip install -r packages.txt`
 3. Run standard commands
 `python manage.py migrate` and `python manage.py createsuperuser`
 4. Load initial data in DB
