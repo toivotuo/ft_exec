@@ -2,14 +2,12 @@
 from __future__ import unicode_literals
 
 from decimal import Decimal
-from datetime import datetime
 from django.db import models
-from django.db.models import Sum, Q, F, Avg
+from django.db.models import Sum, Q, Avg
 from django.db.models.functions import Coalesce
-from django.db.transaction import atomic
 from django.utils.translation import ugettext_lazy as _
 
-from issuer.constants import TRANSACTION_STATUSES, TRANSFER_TYPES, TRANSFER_STATUSES, BALANCE_TYPES, \
+from issuer.constants import TRANSACTION_STATUSES, TRANSFER_TYPES, BALANCE_TYPES, \
     ACCOUNT_TYPES, MESSAGE_TYPES, TRANSACTION_BALANCE_MAPPING
 
 
@@ -64,7 +62,7 @@ class Account(models.Model):
 
     def transfer_to(self, to_account, amount, **transaction_kwargs):
         """
-
+        Transfer money to another account
         """
         if to_account.sign == 1:
             direction = -1
@@ -87,7 +85,8 @@ class Account(models.Model):
 
         return transaction
 
-    def get_transanctions(self, dt=None):
+    def get_transactions(self, dt=None):
+        # TODO: implement for endpoint
         result = [tr.transaction for tr in self.transfers.all()]
         return result
 
@@ -108,7 +107,6 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=24, decimal_places=4,
                                  blank=True, null=True)
     external_transaction_id = models.CharField(_('Scheme transaction id'), max_length=12, null=True)
-    # TODO: think about status
     status = models.SmallIntegerField(_("Transfer Status"), choices=STATUS_CHOICES)
 
     class Meta:

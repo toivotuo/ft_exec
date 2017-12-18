@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import time
-from collections import OrderedDict
 from datetime import datetime
-
 from decimal import Decimal
+
 from django.conf import settings
 from django.db import IntegrityError, transaction
-from django.db.models import Sum, F
+from django.db.models import Sum
 from drf_openapi.utils import view_config
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
@@ -18,9 +17,9 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from issuer.constants import BALANCE_TYPES, TRANSACTION_STATUSES, MESSAGE_TYPES
-from issuer.models import Transfer, Transaction, Account, SchemeMessage
-from issuer.serializers import TransferSerializer, AuthMessageSerializer, \
-    PresentmentMessageSerializer, ResponseSerializer, BalanceSerializer, AccountSerializer
+from issuer.models import Account, SchemeMessage
+from issuer.serializers import AuthMessageSerializer, PresentmentMessageSerializer, ResponseSerializer, \
+    BalanceSerializer, AccountSerializer
 from issuer.utils import get_account_by_card_id, get_bank_acount, get_scheme_account, get_hold_amount, \
     get_equity_account
 
@@ -70,10 +69,8 @@ class ClearingView(BaseViewMixin, APIView):
         response_status = status.HTTP_200_OK
         return Response({"success": True,
                          'status_code': response_status,
-                         # "processed_count": processed_count,
-                         # "content": serializer.data,
-                         'detail': 'clearing has been started'},
-                        status=response_status)
+                         'detail': ['liability: %s EUR' % amount_liability,'equity: %s EUR'% amount_equity]
+                         }, status=response_status)
 
 
 class AuthorisationMessageView(BaseViewMixin, GenericAPIView):

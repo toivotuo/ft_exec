@@ -2,11 +2,8 @@
 import requests
 
 from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
-from django.db.models import Sum, F
+from django.core.management.base import BaseCommand
 from django.urls import reverse_lazy
-
-from issuer.models import Transfer
 
 
 class Command(BaseCommand):
@@ -26,7 +23,7 @@ class Command(BaseCommand):
         headers = self._build_headers()
         response = requests.post(url, data={}, headers=headers)
 
-        self.stdout.write(self.style.SUCCESS('Successfully made transactions for transfers'))
+        self.stdout.write(self.style.SUCCESS('Successfully made clearing operation: \n %s' % response.json()))
 
     def _build_headers(self, consumer_name='issuer'):
         auth_header_name = settings.API_AUTH_HEADER.replace('_', '-')
