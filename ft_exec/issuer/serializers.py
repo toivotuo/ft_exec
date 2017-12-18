@@ -79,6 +79,13 @@ class PresentmentMessageSerializer(BaseMessageSerializer):
             raise serializers.ValidationError("Wrong type")
         return value
 
+    def validate_transaction_id(self, value):
+        try:
+            SchemeMessage.objects.get(type=MESSAGE_TYPES.AUTHORISATION, transaction_id=value)
+        except SchemeMessage.DoesNotExist:
+            raise serializers.ValidationError("Wrong transaction_id")
+        return value
+
 
 class ResponseSerializer(serializers.Serializer):
     success = serializers.BooleanField(help_text='Success or not')
