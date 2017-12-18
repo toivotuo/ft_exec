@@ -5,8 +5,8 @@ from django.conf import settings
 from django.core.management import BaseCommand
 from rest_framework.reverse import reverse_lazy
 
-from card_issuing.models import Account
-from card_issuing.utils import get_account_by_cardholder_name, get_bank_acount
+from issuer.models import Account
+from issuer.utils import get_account_by_cardholder_name, get_bank_acount
 
 
 class Command(BaseCommand):

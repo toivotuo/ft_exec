@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'drf_openapi',
-    'card_issuing',
+    'issuer',
 
 ]
 
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ft_exec.urls'
+ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ft_exec.wsgi.application'
+WSGI_APPLICATION = 'app.wsgi.application'
 
 
 # Database
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'ft_exec.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'card_issuing_db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'ft_exec.sqlite3'),
     }
 }
 
@@ -135,7 +135,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
 
-    'EXCEPTION_HANDLER': 'card_issuing.exceptions.simple_exception_handler',
+    'EXCEPTION_HANDLER': 'issuer.exceptions.simple_exception_handler',
 
 }
 
@@ -145,7 +145,6 @@ API_AUTH_HEADER = 'API_AUTH_KEY'
 API_CONSUMERS_AUTH_HEADERS = {
     'issuer': 'lZ400y5AcQLukN6BI5qZCIMhiGHWJmup',
 }
-
 
 ACCOUNTS_MAPPING = {
     'card_id': {
@@ -157,5 +156,3 @@ ACCOUNTS_MAPPING = {
         'BOB': 'BOB [Liability]',
     }
 }
-
-#DEBUG = False

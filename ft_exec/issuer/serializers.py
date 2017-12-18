@@ -2,9 +2,9 @@
 from rest_framework import serializers
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_409_CONFLICT
 
-from card_issuing.constants import TRANSFER_TYPES, TRANSFER_STATUSES, BALANCE_TYPES, MESSAGE_TYPES
-from card_issuing.models import Transfer, Transaction, SchemeMessage, Account
-from ft_exec.settings import ACCOUNTS_MAPPING
+from issuer.constants import BALANCE_TYPES, MESSAGE_TYPES
+from issuer.models import Transfer, Transaction, SchemeMessage, Account
+from app.settings import ACCOUNTS_MAPPING
 
 
 class AccountSerializer(serializers.ModelSerializer):

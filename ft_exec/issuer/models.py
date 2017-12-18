@@ -9,7 +9,7 @@ from django.db.models.functions import Coalesce
 from django.db.transaction import atomic
 from django.utils.translation import ugettext_lazy as _
 
-from card_issuing.constants import TRANSACTION_STATUSES, TRANSFER_TYPES, TRANSFER_STATUSES, BALANCE_TYPES, \
+from issuer.constants import TRANSACTION_STATUSES, TRANSFER_TYPES, TRANSFER_STATUSES, BALANCE_TYPES, \
     ACCOUNT_TYPES, MESSAGE_TYPES, TRANSACTION_BALANCE_MAPPING
 
 
@@ -24,7 +24,7 @@ class Account(models.Model):
                                            default=Decimal("0.00"))
     amount_ledger = models.DecimalField(_("Ledger Amount"), decimal_places=2, max_digits=12,
                                         default=Decimal("0.00"))
-    type = models.PositiveSmallIntegerField(max_length=2, choices=TYPE_CHOICES, blank=True)
+    type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, blank=True)
     currency = models.CharField(_("Currency"), max_length=12, default="EUR")
 
     def __str__(self):
@@ -109,8 +109,7 @@ class Transaction(models.Model):
                                  blank=True, null=True)
     external_transaction_id = models.CharField(_('Scheme transaction id'), max_length=12, null=True)
     # TODO: think about status
-    status = models.SmallIntegerField(_("Transfer Status"), max_length=12,
-                                      choices=STATUS_CHOICES)
+    status = models.SmallIntegerField(_("Transfer Status"), choices=STATUS_CHOICES)
 
     class Meta:
         ordering = ['-created_at']
@@ -127,12 +126,6 @@ class Transaction(models.Model):
 
 
 class Transfer(models.Model):
-    STATUS_CHOICES = (
-        (TRANSFER_STATUSES.DECLINED, 'Declined'),
-        (TRANSFER_STATUSES.PENDING, 'Pending'),
-        (TRANSFER_STATUSES.FINISHED, 'Finished'),
-    )
-
     account = models.ForeignKey(Account, related_name='transfers')
     amount = models.DecimalField(_("Amount"),
                                  decimal_places=2, max_digits=12,

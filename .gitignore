@@ -186,3 +186,6 @@ logs/*
 *.sds
 wotb_wdw/translations/yo
 wotb_wdw/translations/zu
+
+#sqlite
+*.sqlite3

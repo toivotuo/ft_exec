@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Sum, F
 from django.urls import reverse_lazy
 
-from card_issuing.models import Transfer
+from issuer.models import Transfer
 
 
 class Command(BaseCommand):

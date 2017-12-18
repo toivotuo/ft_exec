@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # That's helpers very simple and pretend true way getting accounts any type
-from card_issuing.constants import TRANSACTION_STATUSES
-from card_issuing.models import Account
-from ft_exec.settings import ACCOUNTS_MAPPING
+from issuer.constants import TRANSACTION_STATUSES
+from issuer.models import Account
+from app.settings import ACCOUNTS_MAPPING
 
 
 def get_account_by_card_id(card_id):

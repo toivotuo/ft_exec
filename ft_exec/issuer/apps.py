@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class CardIssuingConfig(AppConfig):
-    name = 'card_issuing'
+    name = 'issuer'

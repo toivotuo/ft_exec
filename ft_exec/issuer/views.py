@@ -17,11 +17,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from card_issuing.constants import TRANSFER_STATUSES, TRANSFER_TYPES, BALANCE_TYPES, TRANSACTION_STATUSES, MESSAGE_TYPES
-from card_issuing.models import Transfer, Transaction, Account, SchemeMessage
-from card_issuing.serializers import TransferSerializer, AuthMessageSerializer, \
+from issuer.constants import BALANCE_TYPES, TRANSACTION_STATUSES, MESSAGE_TYPES
+from issuer.models import Transfer, Transaction, Account, SchemeMessage
+from issuer.serializers import TransferSerializer, AuthMessageSerializer, \
     PresentmentMessageSerializer, ResponseSerializer, BalanceSerializer, AccountSerializer
-from card_issuing.utils import get_account_by_card_id, get_bank_acount, get_scheme_account, get_hold_amount, \
+from issuer.utils import get_account_by_card_id, get_bank_acount, get_scheme_account, get_hold_amount, \
     get_equity_account
 
 

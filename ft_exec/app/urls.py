@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers, renderers
 
-from card_issuing import views
+from issuer import views
 
 
 router = routers.DefaultRouter()
